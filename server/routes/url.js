@@ -21,16 +21,26 @@ router.post("/shorten", async (req, res) => {
   //4.生成短连接
   const shortUrl = config.get("baseUrl") + urlCode
 
-  //5.存入数据库
-  const url = new UrlModel({
-    longUrl,
-    shortUrl,
-    urlCode,
-    date: new Date().toLocaleString(),
-  })
-  await url.save()
-  //6.响应url对象
-  res.json(url)
+  try {
+    //检测长链接longUrl是否存在数据库
+    const havaurl = await UrlModel.findOne({ longUrl })
+    if (havaurl) return res.json(havaurl)
+
+    //5.存入数据库
+    const url = new UrlModel({
+      longUrl,
+      shortUrl,
+      urlCode,
+      date: new Date().toLocaleString(),
+    })
+    await url.save()
+
+    //6.响应url对象
+    res.json(url)
+  } catch (error) {
+    console.log("error: ", error)
+    res.status(500).json("Server error")
+  }
 })
 
 module.exports = router
