@@ -2,6 +2,6 @@
   "mongodbUrl": "mongodb://ruijing.online:27017/urls",
   "user": "",
   "password": "",
-  "baseUrl": "http://127.0.0.1",
+  "baseUrl": "http://127.0.0.1/",
   "port": 80
 }
