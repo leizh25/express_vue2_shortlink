@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const UrlModel = require("../models/Url")
 const validUrl = require("valid-url")
-const nanoid = require("nanoid")
+const { nanoid } = require("nanoid")
 const config = require("config")
 // @route POST api/url/shorten
 // @desc 创建短连接

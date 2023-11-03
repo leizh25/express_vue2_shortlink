@@ -1,0 +1,6 @@
+POST http://127.0.0.1/api/url/shorten
+Content-Type: application/json
+
+{
+    "longUrl": "http://www.baidu.com1"
+}
