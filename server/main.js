@@ -12,6 +12,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 //配置路由
+app.use("/",require("./routes/index"))
+app.use("/api/url",require("./routes/url"))
 
 //监听启动服务
 const PORT = config.port
