@@ -10,6 +10,14 @@ const ejs = require("ejs")
 
 //连接mongodb数据库
 connectDB()
+
+//配置跨域
+app.all("*", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Content-Type")
+  next()
+})
+
 //中间件解析json, 配置了这个才可以使用req.body
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

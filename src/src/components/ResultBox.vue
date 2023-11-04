@@ -6,10 +6,12 @@
     <img src="images/loading.gif" class="loading-img" v-show="status === 'loading'" />
     <!-- 显示短连接和二维码 -->
     <section class="clink" v-show="status === 'success'">
-      <div class="dc-link">短连接: <a href="javascript:;" class="dc-link-text">http://xxx.xxx/xxx</a></div>
+      <div class="dc-link">
+        短连接: <a :href="shortUrl" class="dc-link-text" target="_blank">{{ shortUrl }}</a>
+      </div>
       <div class="dc-qrcode">
         <span>二维码: </span>
-        <div id="qrcode"></div>
+        <div id="qrcode"><canvas style="width: 200px; height: 200px"></canvas></div>
       </div>
     </section>
   </section>
@@ -21,12 +23,54 @@ export default {
     return {
       message: "提示信息",
       status: "success", //error loading success
+      longUrl: "",
+      shortUrl: "",
     }
   },
+  methods: {
+    init() {
+      this.$bus.$on("sendLongUrl", config => {
+        this.status = ""
+        this.longUrl = config.link
+        if (config.status === true) {
+          //请求结构 带上长链接
+          this.requestShortUrl()
+        } else {
+          this.status = "error"
+          this.message = config.message
+        }
+      })
+    },
+    requestShortUrl() {
+      //进入加载状态
+      this.status = "loading"
+
+      //请求短连接
+      fetch("http://127.0.0.1/api/url/shorten", {
+        method: "post",
+        headers: {
+          "Content-type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          longUrl: this.longUrl,
+        }),
+      })
+        .then(res => res.json())
+        .then(res => {
+          console.log(res)
+          this.status = "success"
+          this.shortUrl = res.shortUrl
+          //生成二维码
+          let qrcode = QRCode.toCanvas(document.querySelector("canvas"), res.shortUrl, function (error) {
+            if (error) console.error(error)
+            console.log("success!")
+          })
+        })
+    },
+  },
   mounted() {
-    this.$bus.$on("sendLongUrl", msg => {
-      console.log(msg)
-    })
+    this.init()
   },
 }
 </script>
@@ -39,8 +83,8 @@ export default {
   overflow: hidden;
 }
 .clink {
-  width: 300px;
-  height: 200px;
+  width: 800px;
+  height: 400px;
   overflow: hidden;
 }
 .dc-link {

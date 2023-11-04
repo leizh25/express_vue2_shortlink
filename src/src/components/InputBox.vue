@@ -22,6 +22,7 @@ export default {
       //1.验证长链接是否合法
       this.config.status = true
       this.config.link = this.longUrl
+      this.config.message = ""
       //验证是否为空
       if (!this.longUrl.replace(/\s*/g, "") && this.config.status) {
         this.config.message = "长链接不能为空"
