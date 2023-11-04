@@ -15,12 +15,16 @@
   </section>
 </template>
 <script>
+import QRCode from "qrcode"
 export default {
   data() {
     return {
       message: "提示信息",
       status: "success", //error loading success
     }
+  },
+  mounted() {
+    console.log(QRCode )
   },
 }
 </script>
