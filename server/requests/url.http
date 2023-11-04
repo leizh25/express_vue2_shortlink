@@ -2,5 +2,5 @@ POST http://127.0.0.1/api/url/shorten
 Content-Type: application/json
 
 {
-    "longUrl": "https://www.cersign.com/accounts/login.html?ReturnUrl=%2Fmembers%2Fproductdetails%3Fid%3D6aa01543-d3e8-4c22-8d69-4ec21fdeea9a"
+    "longUrl": "https://www.bootcdn.cn/"
 }

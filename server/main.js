@@ -24,6 +24,8 @@ app.engine("html", ejs.__express)
 app.set("views", "./views")
 app.set("view engine", "html")
 
+//配置静态资源路径
+app.use(express.static("./public"))
 //监听启动服务
 const PORT = config.port
 app.listen(PORT, () => console.log(`Server listening on ${PORT}`))
