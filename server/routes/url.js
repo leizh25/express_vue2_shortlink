@@ -11,10 +11,10 @@ router.post("/shorten", async (req, res) => {
   const { longUrl } = req.body
 
   //2.验证长链接
-
   if (!validUrl.isUri(longUrl)) {
-    return res.status(401).json("无效的Url")
+    return res.status(401).json({msg:"无效的Url"})
   }
+
   //3.生成url code
   const urlCode = nanoid(10)
 
