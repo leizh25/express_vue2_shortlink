@@ -4,15 +4,16 @@
     <h3 class="title">短连接生成平台</h3>
     <InputBox></InputBox>
     <!-- 短连接展示盒子 -->
+    <ResultBox></ResultBox>
   </div>
 </template>
 
 <script>
 import InputBox from "./components/InputBox.vue"
-
+import ResultBox from "./components/ResultBox.vue"
 export default {
   name: "App",
-  components: { InputBox },
+  components: { InputBox, ResultBox },
 }
 </script>
 
