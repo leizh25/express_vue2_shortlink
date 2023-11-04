@@ -1,11 +1,42 @@
 <template>
   <section class="input-box">
-    <input type="text" class="input" placeholder="请输入长链接地址, 例如:https://xxx.xxx.xxx/xxx" />
-    <button class="input-btn">CLICK</button>
+    <input type="text" class="input" v-model="longUrl" placeholder="请输入长链接地址, 例如:https://xxx.xxx.xxx/xxx" />
+    <button class="input-btn" @click="getLink">CLICK</button>
   </section>
 </template>
 <script>
-export default {}
+import validUrl from "valid-url"
+export default {
+  data() {
+    return {
+      longUrl: "",
+      config: {
+        status: false,
+        link: "",
+        message: "",
+      },
+    }
+  },
+  methods: {
+    getLink() {
+      //1.验证长链接是否合法
+      this.config.status = true
+      this.config.link = this.longUrl
+      //验证是否为空
+      if (!this.longUrl.replace(/\s*/g, "") && this.config.status) {
+        this.config.message = "长链接不能为空"
+        this.config.status = false
+      }
+      //验证是否符合规范
+      if (!validUrl.is_uri(this.longUrl) && this.config.status) {
+        this.config.message = "长链接格式错误"
+        this.config.status = false
+      }
+      //2.把配置信息发送给ResultBox
+      this.$bus.$emit("sendLongUrl", this.config)
+    },
+  },
+}
 </script>
 <style lang="stylus">
 .input-box
@@ -40,5 +71,4 @@ export default {}
     cursor: pointer
 .input-btn:hover
     background-color: #9f8
-
 </style>

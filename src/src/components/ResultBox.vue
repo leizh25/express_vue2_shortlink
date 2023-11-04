@@ -24,7 +24,9 @@ export default {
     }
   },
   mounted() {
-    console.log(QRCode )
+    this.$bus.$on("sendLongUrl", msg => {
+      console.log(msg)
+    })
   },
 }
 </script>
