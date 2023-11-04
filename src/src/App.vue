@@ -1,28 +1,44 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div id="page-box">
+    <!-- 标题 -->
+    <h3 class="title">短连接生成平台</h3>
+    <input type="text" />
+    <!-- 短连接展示盒子 -->
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
 export default {
   name: "App",
-  components: {
-    HelloWorld,
-  },
+  components: {},
 };
 </script>
 
-<style>
-#app {
+<style lang="stylus">
+*
+  margin 0
+  padding 0
+
+html,body
+  width 100%
+  height 100%
+
+#page-box
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  width 100%
+  height 100%
+  position relative
+  background-color #fcd
+
+.title
+  width 100%
+  height 80px
+  line-height 80px
+  text-align center
+  font-size 55px
+  position relative
+  top 10%
+  letter-spacing 5px
+  color #fcd8d5
+  text-shadow: 0px 0px 10px #b23131
 </style>
