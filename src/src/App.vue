@@ -2,16 +2,18 @@
   <div id="page-box">
     <!-- 标题 -->
     <h3 class="title">短连接生成平台</h3>
-    <input type="text" />
+    <InputBox></InputBox>
     <!-- 短连接展示盒子 -->
   </div>
 </template>
 
 <script>
+import InputBox from "./components/InputBox.vue"
+
 export default {
   name: "App",
-  components: {},
-};
+  components: { InputBox },
+}
 </script>
 
 <style lang="stylus">
